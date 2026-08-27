@@ -1,91 +1,116 @@
 <div align="center">
 
 # ⚡ Reve OpenAI-Compatible API Proxy
-### *High-Performance, Multi-Account Ultra-HD Image Generation Engine*
-
-[![GitHub Stars](https://img.shields.io/github/stars/Nystic-Shadow/reve-openai-proxy?style=for-the-badge&color=3B82F6)](https://github.com/Nystic-Shadow/reve-openai-proxy/stargazers)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![Node.js Version](https://img.shields.io/badge/Node.js-v18%2B%20%7C%20v20%2B%20%7C%20v22%2B-brightgreen.svg?style=for-the-badge&logo=node.js)](https://nodejs.org)
-[![Docker Support](https://img.shields.io/badge/Docker-Ready-blue.svg?style=for-the-badge&logo=docker)](https://www.docker.com/)
-[![OpenAI Compatible](https://img.shields.io/badge/OpenAI%20API-100%25%20Compatible-orange.svg?style=for-the-badge&logo=openai)](https://platform.openai.com/docs/api-reference/images)
-[![Hermes Agent](https://img.shields.io/badge/Hermes%20Agent-Plug%20%26%20Play-purple.svg?style=for-the-badge)](https://github.com/Nystic-Shadow/reve-openai-proxy)
+### 🚀 *Ultra-HD 4K AI Image Generation Engine with Multi-Account Load Balancing*
 
 <p align="center">
-  <b>A blazing-fast, drop-in replacement proxy turning Reve.com's diffusion model into an OpenAI Images API (`/v1/images/generations`, `/v1/images/edits`, `/v1/models`).</b><br>
-  <i>Built for Hermes Agent, Open WebUI, ComfyUI, LibreChat, Cursor, NextChat, Python & Node.js OpenAI SDKs.</i>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&customColorList=0,2,25,45,65,85,100&text=Reve%20OpenAI%20Proxy&fontSize=60&fontAlignY=38&desc=Universal%20DALL-E%203%20/%20OpenAI%20Images%20API%20Drop-In%20Replacement&descFontSize=20&descAlignY=60&height=240&animation=twinkling" width="100%" alt="Header Banner"/>
+</p>
+
+[![GitHub Stars](https://img.shields.io/github/stars/Nystic-Shadow/reve-openai-proxy?style=for-the-badge&logo=starship&color=3B82F6&logoColor=white)](https://github.com/Nystic-Shadow/reve-openai-proxy/stargazers)
+[![GitHub Forks](https://img.shields.io/github/forks/Nystic-Shadow/reve-openai-proxy?style=for-the-badge&logo=git&color=8B5CF6&logoColor=white)](https://github.com/Nystic-Shadow/reve-openai-proxy/network/members)
+[![License: MIT](https://img.shields.io/badge/License-MIT-10B981.svg?style=for-the-badge&logo=opensourceinitiative&logoColor=white)](https://opensource.org/licenses/MIT)
+[![Node.js Version](https://img.shields.io/badge/Node.js-v18%2B%20%7C%20v20%2B%20%7C%20v22%2B-22C55E.svg?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org)
+[![Docker Support](https://img.shields.io/badge/Docker-Container%20Ready-0EA5E9.svg?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
+[![OpenAI Compatible](https://img.shields.io/badge/OpenAI%20API-100%25%20Compatible-F97316.svg?style=for-the-badge&logo=openai&logoColor=white)](https://platform.openai.com/docs/api-reference/images)
+
+<br/>
+
+<p align="center">
+  <b>A blazing-fast, drop-in replacement proxy that converts Reve.com into a standard OpenAI Images API (`/v1/images/generations`, `/v1/images/edits`, `/v1/models`).</b><br>
+  <i>Works seamlessly with <b>ANY</b> AI agent, frontend, SDK, or framework without modification.</i>
 </p>
 
 ---
 
-[Key Features](#-key-features) •
-[Quick Start](#-quick-start) •
-[Hermes Integration](#-hermes-agent-integration) •
-[SDK Examples](#-sdk--api-examples) •
-[Docker Deployment](#-docker-deployment) •
-[Model Catalog](#-model-catalog) •
-[Author](#-author)
+[✨ Key Features](#-key-features) •
+[🌐 Universal Compatibility](#-universal-compatibility) •
+[⚡ Quick Start](#-quick-start) •
+[📐 4K Resolution Matrix](#-4k-resolution--aspect-ratio-matrix) •
+[💻 SDK & Client Integrations](#-sdk--client-integrations) •
+[🐳 Docker Setup](#-docker-deployment) •
+[👤 Author](#-author)
 
 ---
 
 </div>
 
-## 🌟 Key Features
+## ✨ Key Features
 
-* 🚀 **Ultra High Quality (UHQ 4K/2K)**: Native high-resolution diffusion rendering up to 4096×4096 with full multi-pass denoising.
+* 💎 **Ultra-High-Definition (UHQ 4K/2K)**: Automatically renders crisp native **4096×4096** diffusion canvases with full multi-pass denoising.
 * 🔄 **Smart Multi-Account Router**:
   * **1 Token**: Runs in **Single Account Direct Mode**.
-  * **2+ Tokens**: Automatically activates **Multi-Account Pool with Round-Robin & Instant Failover**.
-* 🔑 **Dummy / Any API Key Accepted**: Plug it anywhere without strict token hassle (`sk-dummy`, `sk-random-key`, or empty).
-* 🖥️ **Python `rich`-Style Terminal UI**: Beautiful boxed CLI with live energy gauges, status badges, and sub-millisecond request logs.
-* 🎯 **100% DALL-E 3 / DALL-E 2 Drop-in Spec**:
-  * Seamlessly handles DALL-E landscape (`1792x1024`), portrait (`1024x1792`), and square (`1024x1024`).
-  * Supports both `b64_json` and `url` response formats.
-* 🎨 **Image Inpainting & Edits**: Full support for `/v1/images/edits` via both `multipart/form-data` and JSON Base64/URL inputs.
-* ⚡ **Connection Pooling & Parallel Batching**: HTTP Keep-Alive sockets with concurrent multi-account image generation (`n > 1`).
+  * **2+ Tokens**: Automatically activates **Multi-Account Pool with Round-Robin & Auto-Failover**.
+* 🔑 **Universal Dummy Key Support**: Accepts any API key (`sk-dummy`, `sk-12345`, `not-used`, or none) for instant zero-friction setup.
+* 🖥️ **Python `rich`-Style Terminal UI**: Beautiful bordered console with dynamic ASCII progress gauges, color-coded badges, and live latency stats.
+* 🎯 **100% OpenAI Specification Parity**:
+  * **Endpoints**: `/v1/images/generations`, `/v1/images/edits`, `/v1/models`, `/health`.
+  * **Models**: `dall-e-3`, `dall-e-2`, `reve-1`, `reve-2`, `reve-preview`, `reve-fast`.
+  * **Formats**: `b64_json` (Base64) and `url` (Hosted image link).
+* 🎨 **Inpainting & Image Edits**: Supports `/v1/images/edits` with both standard `multipart/form-data` file uploads and JSON Base64/URL inputs.
+* ⚡ **Connection Pooling & Parallel Batching**: HTTP Keep-Alive sockets with concurrent multi-account generation when requesting `n > 1`.
+
+---
+
+## 🌐 Universal Compatibility
+
+You can plug this proxy into **literally any tool, UI, or library** that supports OpenAI or custom API Base URLs:
+
+<div align="center">
+
+| AI Agents & Frameworks | Web Frontends & Chat UIs | Developer Tools & IDEs | Programming SDKs |
+|:---|:---|:---|:---|
+| 🤖 **Hermes Agent** | 💬 **Open WebUI** | 💻 **Cursor IDE** | 🐍 **Python (`openai`)** |
+| 🦜 **LangChain** | 🎨 **ComfyUI** | ⚡ **Continue.dev** | 🟨 **JavaScript / Node.js** |
+| ⚡ **LiteLLM** | 📚 **LibreChat** | 🛠️ **Postman / Insomnia** | 🦀 **Rust (`async-openai`)** |
+| 🧠 **AutoGPT** | 🌸 **LobeChat** | 📟 **cURL & PowerShell** | 🔷 **Go / C# / Java / PHP** |
+| 🦾 **CrewAI** | 📱 **NextChat (ChatGPT-Next-Web)** | 🔌 **Dify.ai** | 🌐 **REST / HTTP** |
+
+</div>
 
 ---
 
 ## 🏗️ System Architecture
 
 ```
-                                    ┌─────────────────────────────────────────────────┐
-                                    │    Client (Hermes / OpenAI SDK / Open WebUI)    │
-                                    └───────────────────────┬─────────────────────────┘
-                                                            │ HTTP POST /v1/images/generations
-                                                            ▼
-                                    ┌─────────────────────────────────────────────────┐
-                                    │      Reve OpenAI Proxy (Port 5674 / Express)    │
-                                    │      - Dummy Key Authentication                 │
-                                    │      - Multi-Account Auto Load Balancer         │
-                                    │      - DALL-E 3 -> Reve Dimension Mapper        │
-                                    └──────────┬───────────────────────────┬──────────┘
-                                               │                           │
-                     Account 1 (Round-Robin)   │                           │ Account 2 (Failover)
-                                               ▼                           ▼
-                                ┌───────────────────────────┐ ┌───────────────────────────┐
-                                │   Reve Backend (Token 1)  │ │   Reve Backend (Token 2)  │
-                                │   POST runwf-stream       │ │   POST runwf-stream       │
-                                └──────────────┬────────────┘ └─────────────┬─────────────┘
-                                               │                            │
-                                               ▼ SSE Multi-Pass Stream      ▼
-                                    ┌─────────────────────────────────────────────────┐
-                                    │   4K/2K Ultra-HD Output Parser & Base64 Decoder │
-                                    └───────────────────────┬─────────────────────────┘
-                                                            │ HTTP 200 JSON { b64_json }
-                                                            ▼
-                                    ┌─────────────────────────────────────────────────┐
-                                    │          Rendered Ultra-HD Masterpiece          │
-                                    └─────────────────────────────────────────────────┘
+                                    ┌────────────────────────────────────────────────────────┐
+                                    │    Any Client (OpenAI SDK / WebUI / Agent / Script)   │
+                                    └───────────────────────────┬────────────────────────────┘
+                                                                │ HTTP POST /v1/images/generations
+                                                                ▼
+                                    ┌────────────────────────────────────────────────────────┐
+                                    │      Reve OpenAI Proxy (Port 5674 / Express Engine)    │
+                                    │      - Dummy Key Authentication Pass-Through           │
+                                    │      - Multi-Account Auto Load Balancer & Failover     │
+                                    │      - DALL-E 3 -> Native 4K/2K Canvas Resolution      │
+                                    └──────────────┬───────────────────────────┬─────────────┘
+                                                   │                           │
+                         Account 1 (Round-Robin)   │                           │ Account 2 (Auto-Failover)
+                                                   ▼                           ▼
+                                    ┌───────────────────────────┐ ┌───────────────────────────┐
+                                    │   Reve Engine (Account 1) │ │   Reve Engine (Account 2) │
+                                    │   POST /runwf-stream      │ │   POST /runwf-stream      │
+                                    └──────────────┬────────────┘ └─────────────┬─────────────┘
+                                                   │                            │
+                                                   ▼ SSE Multi-Pass Stream      ▼
+                                    ┌────────────────────────────────────────────────────────┐
+                                    │   4K/2K Ultra-HD Output Parser & Base64 Decoder        │
+                                    └───────────────────────────┬────────────────────────────┘
+                                                                │ HTTP 200 JSON { b64_json }
+                                                                ▼
+                                    ┌────────────────────────────────────────────────────────┐
+                                    │             Rendered 4096×4096 Masterpiece             │
+                                    └────────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## 🚀 Quick Start
+## ⚡ Quick Start
 
-### 1. Extract Your Reve Token(s)
-1. Open [https://app.reve.com](https://app.reve.com) and log in.
-2. Press **`F12`** to open Browser DevTools ➔ Go to **Console**.
-3. Paste and run:
+### 1. Extract Your Reve Bearer Token
+1. Open [https://app.reve.com](https://app.reve.com) in your browser and log in.
+2. Press **`F12`** (or **`Ctrl + Shift + I`** / **`Cmd + Option + I`**) to open DevTools.
+3. In the **Console** tab, paste and press **Enter**:
    ```javascript
    copy(localStorage.getItem('reve:bearer_token')); console.log(localStorage.getItem('reve:bearer_token'));
    ```
@@ -94,15 +119,16 @@
 ---
 
 ### 2. Configure `.env`
-Create `.env` from `.env.example` and add your token(s):
+Create your `.env` file and add your token(s):
 
 ```ini
 PORT=5674
 HOST=0.0.0.0
 
-# Add as many accounts as you want (TOKEN_1, TOKEN_2, TOKEN_3, ...):
+# Add 1 token for Single Mode, or multiple for Auto-Round-Robin:
 TOKEN_1=v2.login-your_first_account_token_here
 TOKEN_2=v2.login-your_second_account_token_here
+TOKEN_3=v2.login-your_third_account_token_here
 ```
 
 ---
@@ -113,11 +139,11 @@ TOKEN_2=v2.login-your_second_account_token_here
 # Install dependencies
 npm install
 
-# Start the high-performance proxy
+# Start proxy
 npm start
 ```
 
-Your proxy will launch on **`http://localhost:5674`** with an interactive terminal UI:
+Your server starts on **`http://localhost:5674`** with an interactive rich terminal interface:
 
 ```
   ██████╗ ███████╗██╗   ██╗███████╗    ██████╗ ██████╗  ██████╗ ██╗  ██╗██╗   ██╗
@@ -133,21 +159,11 @@ Your proxy will launch on **`http://localhost:5674`** with an interactive termin
 
 ---
 
-## 🔌 Hermes Agent Integration
+## 💻 SDK & Client Integrations
 
-In your Hermes agent environment or configuration:
+<details open>
+<summary><b>🐍 Python (Official OpenAI SDK)</b></summary>
 
-```bash
-IMAGE_API_BASE=http://localhost:5674/v1
-IMAGE_API_KEY=sk-dummy-key
-IMAGE_MODEL=dall-e-3
-```
-
----
-
-## 💻 SDK & API Examples
-
-### Python (Official OpenAI SDK)
 ```python
 from openai import OpenAI
 import base64
@@ -157,6 +173,7 @@ client = OpenAI(
     api_key="sk-dummy-anything"  # Any dummy key is accepted
 )
 
+# Text-to-Image Generation
 response = client.images.generate(
     model="dall-e-3",
     prompt="A cinematic futuristic cyberpunk city at night, neon lights, rain, highly detailed, dramatic lighting",
@@ -171,10 +188,11 @@ with open("cyberpunk_city.png", "wb") as f:
     f.write(image_bytes)
 print("Image saved as cyberpunk_city.png!")
 ```
+</details>
 
----
+<details>
+<summary><b>🟨 Node.js / JavaScript (Official OpenAI SDK)</b></summary>
 
-### Node.js (Official OpenAI SDK)
 ```javascript
 import OpenAI from "openai";
 import fs from "fs";
@@ -184,7 +202,7 @@ const openai = new OpenAI({
   apiKey: "sk-dummy-anything",
 });
 
-async function generate() {
+async function main() {
   const response = await openai.images.generate({
     model: "dall-e-3",
     prompt: "a majestic golden phoenix rising from neon flames, 8k uhd",
@@ -196,12 +214,34 @@ async function generate() {
   console.log("Image saved as phoenix.png!");
 }
 
-generate();
+main();
 ```
+</details>
 
----
+<details>
+<summary><b>🤖 Hermes Agent Integration</b></summary>
 
-### PowerShell
+In your Hermes agent environment or config file:
+```bash
+IMAGE_API_BASE=http://localhost:5674/v1
+IMAGE_API_KEY=sk-dummy-key
+IMAGE_MODEL=dall-e-3
+```
+</details>
+
+<details>
+<summary><b>💬 Open WebUI & LibreChat Setup</b></summary>
+
+1. In Open WebUI or LibreChat Settings ➔ **Image Generation**:
+2. Set **API Engine**: `OpenAI`
+3. Set **API Base URL**: `http://localhost:5674/v1`
+4. Set **API Key**: `sk-dummy`
+5. Set **Default Model**: `dall-e-3`
+</details>
+
+<details>
+<summary><b>📟 PowerShell</b></summary>
+
 ```powershell
 $headers = @{
     "Authorization" = "Bearer dummy-api-key"
@@ -218,12 +258,13 @@ $body = @{
 $response = Invoke-RestMethod -Uri "http://localhost:5674/v1/images/generations" -Method POST -Headers $headers -Body $body
 $bytes = [Convert]::FromBase64String($response.data[0].b64_json)
 [IO.File]::WriteAllBytes("cyberpunk_city.png", $bytes)
-Write-Output "Image saved successfully!"
+Write-Output "Image saved successfully as cyberpunk_city.png!"
 ```
+</details>
 
----
+<details>
+<summary><b>⚡ cURL</b></summary>
 
-### cURL
 ```bash
 curl -X POST http://localhost:5674/v1/images/generations \
   -H "Authorization: Bearer sk-dummy" \
@@ -234,12 +275,37 @@ curl -X POST http://localhost:5674/v1/images/generations \
     "size": "1792x1024"
   }' | jq -r '.data[0].b64_json' | base64 -d > watch.png
 ```
+</details>
+
+---
+
+## 📐 4K Resolution & Aspect Ratio Matrix
+
+| Parameter / Aspect Ratio | Native Rendered Canvas | Best Use Case |
+|---|---|---|
+| `1:1` or `1024x1024` | **4096 × 4096 / 2048 × 2048 (UHD Square)** | Avatars, Profile Pictures, Album Covers |
+| `16:9` or `1792x1024` | **2560 × 1440 (QHD Widescreen)** | Desktop Wallpapers, YouTube Covers, Landscapes |
+| `9:16` or `1024x1792` | **1440 × 2560 (QHD Portrait)** | Mobile Wallpapers, Instagram Stories, TikTok |
+| `21:9` | **2560 × 1080 (Ultrawide)** | Cinematic Concept Art, Panoramic Vistas |
+| `4:3` / `3:4` | **2048 × 1536 / 1536 × 2048** | Classic Photography, Posters |
+
+---
+
+## 🎨 Supported Models
+
+| Model ID | Engine Target | Capabilities | Description |
+|---|---|---|---|
+| **`dall-e-3`** | Reve Flagship UHD | `text2image`, `edits` | High-detail realistic scenes & artwork (Drop-in DALL-E 3) |
+| **`dall-e-2`** | Reve Standard | `text2image`, `edits` | Quick generation & testing (Drop-in DALL-E 2) |
+| **`reve-1`** | Reve Direct Core | `text2image`, `edits` | Direct Reve diffusion pipeline |
+| **`reve-2` / `reve-preview`** | Reve Next-Gen Engine | `text2image`, `edits` | Advanced prompt composition |
+| **`reve-fast`** | Reve Turbo | `text2image` | Rapid prototyping & fast iterations |
 
 ---
 
 ## 🐳 Docker Deployment
 
-### Using Docker Compose (Recommended)
+### Docker Compose (Recommended)
 ```bash
 # Start container in detached mode
 docker compose up -d
@@ -251,7 +317,7 @@ docker compose logs -f
 docker compose down
 ```
 
-### Using Plain Docker
+### Standalone Docker Run
 ```bash
 docker build -t reve-openai-proxy .
 docker run -d --name reve-openai-proxy -p 5674:5674 --env-file .env reve-openai-proxy
@@ -259,33 +325,9 @@ docker run -d --name reve-openai-proxy -p 5674:5674 --env-file .env reve-openai-
 
 ---
 
-## 🎨 Model Catalog
+## 🚦 Endpoints Reference
 
-| Model ID | Target Engine | Capabilities | Best For |
-|---|---|---|---|
-| **`dall-e-3`** | Reve Flagship UHD | `text2image`, `edits` | High-detail realistic scenes & artwork |
-| **`dall-e-2`** | Reve Standard | `text2image`, `edits` | Quick generation & testing |
-| **`reve-1`** | Reve Direct Core | `text2image`, `edits` | Direct Reve pipeline |
-| **`reve-2` / `reve-preview`** | Reve Next-Gen Engine | `text2image`, `edits` | Advanced prompt composition |
-| **`reve-fast`** | Reve Turbo | `text2image` | Rapid prototyping |
-
----
-
-## 📐 Aspect Ratio & Resolution Matrix
-
-| Parameter / Aspect Ratio | Rendered Canvas Resolution | Optimal Framing |
-|---|---|---|
-| `1:1` or `1024x1024` | **2048 × 2048 (2K UHD)** | Avatars, Album Covers, Social Squares |
-| `16:9` or `1792x1024` | **2560 × 1440 (QHD Widescreen)** | Desktop Wallpapers, YouTube Banners, Landscapes |
-| `9:16` or `1024x1792` | **1440 × 2560 (QHD Portrait)** | Mobile Wallpapers, Stories, Vertical Art |
-| `21:9` | **2560 × 1080 (Ultrawide)** | Cinematic scenes |
-| `4:3` / `3:4` | **2048 × 1536 / 1536 × 2048** | Classic Photography |
-
----
-
-## 🚦 Endpoints Summary
-
-| Method | Route | Description |
+| Method | Endpoint | Description |
 |---|---|---|
 | `POST` | `/v1/images/generations` | OpenAI Text-to-Image Generation |
 | `POST` | `/v1/images/edits` | OpenAI Image Inpainting & Edits (`multipart/form-data` & JSON) |
@@ -298,9 +340,9 @@ docker run -d --name reve-openai-proxy -p 5674:5674 --env-file .env reve-openai-
 
 ## 👤 Author
 
-Developed and maintained by **[Nystic-Shadow](https://github.com/Nystic-Shadow)**.
+Developed and maintained with ❤️ by **[Nystic-Shadow](https://github.com/Nystic-Shadow)**.
 
-⭐ **If you find this project useful, please consider giving it a star on GitHub!**
+⭐ **If you find this project helpful, please give it a star on GitHub!**
 
 ---
 
