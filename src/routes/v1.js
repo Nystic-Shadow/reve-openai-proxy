@@ -122,13 +122,13 @@ async function generateSingleWithRetry({ prompt, width, height, modelVersion, re
     try {
       let projectId = account.defaultProject;
       if (!projectId) {
-        const cfg = await reveClient.getFeatureConfig(account.token);
-        projectId = cfg.user_info?.default_project;
+        const info = await reveClient.getUserInfo(account.token);
+        projectId = info.user?.default_project || (info.projects && info.projects[0] ? info.projects[0].id : null) || null;
         account.defaultProject = projectId;
       }
 
       if (!projectId) {
-        throw new Error(`Account ${account.id} has no default_project configured on Reve`);
+        throw new Error(`Account ${account.id} has no valid project on Reve`);
       }
 
       const result = await reveClient.generateImageWorkflow({
@@ -331,8 +331,8 @@ router.post('/images/edits', upload.single('image'), async (req, res) => {
 
     let projectId = account.defaultProject;
     if (!projectId) {
-      const cfg = await reveClient.getFeatureConfig(account.token);
-      projectId = cfg.user_info?.default_project;
+      const info = await reveClient.getUserInfo(account.token);
+      projectId = info.user?.default_project || (info.projects && info.projects[0] ? info.projects[0].id : null) || null;
       account.defaultProject = projectId;
     }
 

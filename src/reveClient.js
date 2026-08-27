@@ -45,7 +45,30 @@ function getHeaders(token, extra = {}) {
 }
 
 /**
- * Fetch user profile and project configuration
+ * Fetch user profile and project configuration via /api/misc/userinfo
+ */
+async function getUserInfo(token) {
+  try {
+    const resp = await apiClient.get('/api/misc/userinfo', {
+      headers: getHeaders(token),
+      timeout: 15000,
+    });
+    return resp.data;
+  } catch (err) {
+    // Fallback to feature_config if userinfo fails
+    const resp = await apiClient.get('/api/misc/feature_config', {
+      headers: getHeaders(token),
+      timeout: 15000,
+    });
+    return {
+      user: resp.data.user_info || {},
+      projects: resp.data.user_info?.default_project ? [{ id: resp.data.user_info.default_project }] : [],
+    };
+  }
+}
+
+/**
+ * Fetch feature configuration
  */
 async function getFeatureConfig(token) {
   const resp = await apiClient.get('/api/misc/feature_config', {
@@ -346,6 +369,7 @@ async function generateImageWorkflow({
 }
 
 module.exports = {
+  getUserInfo,
   getFeatureConfig,
   uploadImage,
   ensureRootNode,

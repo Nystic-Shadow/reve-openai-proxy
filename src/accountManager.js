@@ -53,18 +53,20 @@ class AccountManager {
   }
 
   /**
-   * Sync single account status with Reve API
+   * Sync single account status with Reve API via /api/misc/userinfo
    */
   async syncAccount(account) {
     try {
-      const data = await reveClient.getFeatureConfig(account.token);
-      const userInfo = data.user_info || {};
-      account.name = userInfo.name || account.name;
-      account.plan = userInfo.plan_type || 'free';
-      account.energy = typeof userInfo.regular_energy === 'number' ? userInfo.regular_energy : 0;
-      account.batterySize = typeof userInfo.battery_size === 'number' ? userInfo.battery_size : 120000;
+      const data = await reveClient.getUserInfo(account.token);
+      const user = data.user || data.user_info || {};
+      const projects = data.projects || [];
+
+      account.name = user.name || account.name;
+      account.plan = user.plan_type || 'free';
+      account.energy = typeof user.regular_energy === 'number' ? user.regular_energy : 0;
+      account.batterySize = typeof user.battery_size === 'number' ? user.battery_size : 120000;
       account.initialEnergy = Math.max(account.batterySize, account.energy);
-      account.defaultProject = userInfo.default_project || null;
+      account.defaultProject = user.default_project || (projects[0] ? projects[0].id : null) || null;
       account.lastSync = new Date().toISOString();
       account.lastError = null;
 
