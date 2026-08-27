@@ -131,7 +131,7 @@ You can plug this proxy into **literally any tool, UI, or library** that support
 
 ## ⚡ Quick Start
 
-### 1. Extract Your Reve Bearer Token
+### 1. Extract Your Reve Bearer Token(s)
 1. Open [https://app.reve.com](https://app.reve.com) in your browser and log in.
 2. Press **`F12`** (or **`Ctrl + Shift + I`** / **`Cmd + Option + I`**) to open DevTools.
 3. In the **Console** tab, paste and press **Enter**:
@@ -139,6 +139,16 @@ You can plug this proxy into **literally any tool, UI, or library** that support
    copy(localStorage.getItem('reve:bearer_token')); console.log(localStorage.getItem('reve:bearer_token'));
    ```
 4. The token starting with `v2.login-...` is copied to your clipboard.
+
+> [!TIP]
+> **Multi-Account Token Extraction (Crucial Rule):**
+> ⚠️ **DO NOT click the "Log Out" button** on Reve when grabbing tokens for multiple accounts, because clicking "Log Out" immediately revokes the session on Reve's servers.
+> 
+> **How to get multiple active tokens easily:**
+> * Open an **Incognito / Private window** (or a separate browser profile / different browser).
+> * Log into Account 1 ➔ Run the command in Console ➔ Paste into `TOKEN_1` ➔ **Simply close the window** (do not click Log Out).
+> * Open a new Incognito window ➔ Log into Account 2 ➔ Copy token ➔ Paste into `TOKEN_2` ➔ **Close the window**.
+> * Repeat for as many accounts as you want. All tokens will stay **permanently active simultaneously** in your load-balancing pool!
 
 ---
 
