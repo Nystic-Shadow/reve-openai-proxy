@@ -57,6 +57,9 @@ app.use((req, res, next) => {
 // Mount Core API Routes
 app.use('/v1', v1Router);
 
+// Favicon handler
+app.get('/favicon.ico', (req, res) => res.status(204).end());
+
 // Health / Status JSON Endpoint
 app.get(['/', '/health'], (req, res) => {
   const summary = accountManager.getSummary();
