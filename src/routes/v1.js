@@ -7,9 +7,11 @@ const accountManager = require('../accountManager');
 const reveClient = require('../reveClient');
 
 const router = express.Router();
+
+// Multer configured with upload.any() to flexibly accept any multipart field names
 const upload = multer({
   storage: multer.memoryStorage(),
-  limits: { fileSize: 25 * 1024 * 1024 }, // 25MB max
+  limits: { fileSize: 35 * 1024 * 1024 }, // 35MB max
 });
 
 function uuidv4() {
@@ -31,6 +33,24 @@ function cacheImage(buffer, mimeType = 'image/webp') {
   setTimeout(() => imageCache.delete(id), CACHE_TTL_MS);
   return id;
 }
+
+/**
+ * GET /v1 - Base Info Endpoint
+ */
+router.get(['/', ''], (req, res) => {
+  res.json({
+    status: 'online',
+    service: 'reve-openai-proxy-v1',
+    description: 'OpenAI-Compatible Image Generation API Proxy',
+    endpoints: [
+      '/v1/images/generations',
+      '/v1/images/edits',
+      '/v1/models',
+    ],
+    default_model: 'reve-fast',
+    active_models: config.models.map((m) => m.id),
+  });
+});
 
 /**
  * Image Cache serving route
@@ -107,7 +127,7 @@ function resolveModelVersion(modelName) {
 }
 
 /**
- * Helper to generate a single image with multi-account retry & failover
+ * Helper to generate a single text-to-image with multi-account retry & failover
  */
 async function generateSingleWithRetry({ prompt, width, height, modelVersion, referenceImageId = null }) {
   let lastError = null;
@@ -154,6 +174,65 @@ async function generateSingleWithRetry({ prompt, width, height, modelVersion, re
   }
 
   throw new Error(`Image generation failed after ${config.maxRetries} attempts across accounts: ${lastError?.message}`);
+}
+
+/**
+ * Helper to perform atomic upload + edit on the SAME account with multi-account retry & failover
+ */
+async function editSingleWithRetry({ imageBuffer, mimeType, prompt, width, height, modelVersion }) {
+  let lastError = null;
+  const excludedAccountIds = [];
+
+  for (let attempt = 0; attempt < config.maxRetries; attempt++) {
+    const account = accountManager.getAccount(excludedAccountIds);
+    if (!account) {
+      throw new Error('No active Reve accounts available with sufficient energy');
+    }
+
+    try {
+      let projectId = account.defaultProject;
+      if (!projectId) {
+        const info = await reveClient.getUserInfo(account.token);
+        projectId = info.user?.default_project || (info.projects && info.projects[0] ? info.projects[0].id : null) || null;
+        account.defaultProject = projectId;
+      }
+
+      if (!projectId) {
+        throw new Error(`Account ${account.id} has no valid project on Reve`);
+      }
+
+      // Step 1: Upload image to this account's project
+      const refNodeId = await reveClient.uploadImage(
+        account.token,
+        projectId,
+        imageBuffer,
+        mimeType
+      );
+
+      // Step 2: Generate on the same account's project
+      const result = await reveClient.generateImageWorkflow({
+        token: account.token,
+        projectId,
+        prompt,
+        width,
+        height,
+        modelVersion,
+        referenceImageId: refNodeId,
+      });
+
+      accountManager.recordSuccess(account.id, 15000);
+      return { result, accountId: account.id };
+    } catch (err) {
+      lastError = err;
+      accountManager.recordFailure(account.id, err);
+      excludedAccountIds.push(account.id);
+      console.warn(
+        `⚠️  [Attempt ${attempt + 1}] Account ${account.id} (${account.envKey}) edit failed: ${err.message}. Failing over to next account...`
+      );
+    }
+  }
+
+  throw new Error(`Image edit failed after ${config.maxRetries} attempts across accounts: ${lastError?.message}`);
 }
 
 /**
@@ -263,9 +342,9 @@ router.post('/images/generations', async (req, res) => {
 
 /**
  * POST /v1/images/edits
- * Ultra High Quality Image Edits (Supports multipart/form-data & JSON payloads)
+ * Ultra High Quality Image Edits (Supports any multipart file field names AND raw JSON payloads)
  */
-router.post('/images/edits', upload.single('image'), async (req, res) => {
+router.post('/images/edits', upload.any(), async (req, res) => {
   try {
     let prompt = req.body.prompt;
     let model = req.body.model || 'reve-fast';
@@ -273,13 +352,23 @@ router.post('/images/edits', upload.single('image'), async (req, res) => {
     let quality = req.body.quality || 'hd';
     let aspect_ratio = req.body.aspect_ratio;
     let response_format = req.body.response_format || 'b64_json';
-    let rawImage = req.body.image;
+    let rawImage = req.body.image || req.body.image_file || req.body.input_image || req.body.file;
 
     let imageBuffer = null;
     let mimeType = 'image/png';
 
-    // 1. Check if uploaded via multipart/form-data file
-    if (req.file) {
+    // 1. Check if uploaded via multipart/form-data files (accepts image, image[], image_file, input_image, etc.)
+    if (req.files && req.files.length > 0) {
+      const targetFile =
+        req.files.find((f) =>
+          ['image', 'image[]', 'image_file', 'input_image', 'file', 'files', 'mask'].includes(f.fieldname)
+        ) || req.files[0];
+
+      if (targetFile) {
+        imageBuffer = targetFile.buffer;
+        mimeType = targetFile.mimetype || 'image/png';
+      }
+    } else if (req.file) {
       imageBuffer = req.file.buffer;
       mimeType = req.file.mimetype || 'image/png';
     } else if (rawImage && typeof rawImage === 'string') {
@@ -323,34 +412,14 @@ router.post('/images/edits', upload.single('image'), async (req, res) => {
     const modelVersion = resolveModelVersion(model);
     const baseUrl = `${req.protocol}://${req.get('host')}`;
 
-    // Pick active account for reference upload & edit
-    const account = accountManager.getAccount();
-    if (!account) {
-      throw new Error('No active Reve accounts available');
-    }
-
-    let projectId = account.defaultProject;
-    if (!projectId) {
-      const info = await reveClient.getUserInfo(account.token);
-      projectId = info.user?.default_project || (info.projects && info.projects[0] ? info.projects[0].id : null) || null;
-      account.defaultProject = projectId;
-    }
-
-    // Upload source image
-    const refNodeId = await reveClient.uploadImage(
-      account.token,
-      projectId,
+    // Execute atomic upload & edit on the same account
+    const { result, accountId } = await editSingleWithRetry({
       imageBuffer,
-      mimeType
-    );
-
-    // Run edit workflow with reference node ID
-    const { result, accountId } = await generateSingleWithRetry({
+      mimeType,
       prompt: prompt.trim(),
       width,
       height,
       modelVersion,
-      referenceImageId: refNodeId,
     });
 
     req._usedAccountId = accountId;
