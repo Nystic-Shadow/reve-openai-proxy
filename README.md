@@ -57,10 +57,10 @@
 
 | Model ID | Engine Target | Capabilities | Description |
 |---|---|---|---|
-| **`reve-1`** | Reve Flagship UHD | `text2image`, `edits` | High-detail realistic scenes & artwork (Default Model) |
+| **`reve-fast`** | Reve Turbo Engine | `text2image`, `edits` | High-speed ultra-fast generation (**Default Model**) |
+| **`reve-1`** | Reve Flagship UHD | `text2image`, `edits` | High-detail realistic scenes & artwork |
 | **`reve-2`** | Reve Next-Gen Engine | `text2image`, `edits` | Advanced prompt composition & rendering |
 | **`reve-preview`** | Reve Preview Engine | `text2image`, `edits` | Experimental latest pipeline |
-| **`reve-fast`** | Reve Turbo | `text2image` | Rapid prototyping & fast iterations |
 
 ---
 
@@ -199,7 +199,7 @@ client = OpenAI(
 
 # Text-to-Image Generation
 response = client.images.generate(
-    model="reve-1",
+    model="reve-fast",
     prompt="A cinematic futuristic cyberpunk city at night, neon lights, rain, highly detailed, dramatic lighting",
     size="1792x1024",  # Landscape
     quality="hd",
@@ -228,7 +228,7 @@ const openai = new OpenAI({
 
 async function main() {
   const response = await openai.images.generate({
-    model: "reve-1",
+    model: "reve-fast",
     prompt: "a majestic golden phoenix rising from neon flames, 8k uhd",
     size: "1024x1024",
   });
@@ -249,7 +249,7 @@ In your Hermes agent environment or config file:
 ```bash
 IMAGE_API_BASE=http://localhost:5674/v1
 IMAGE_API_KEY=sk-dummy-key
-IMAGE_MODEL=reve-1
+IMAGE_MODEL=reve-fast
 ```
 </details>
 
@@ -260,7 +260,7 @@ IMAGE_MODEL=reve-1
 2. Set **API Engine**: `OpenAI`
 3. Set **API Base URL**: `http://localhost:5674/v1`
 4. Set **API Key**: `sk-dummy`
-5. Set **Default Model**: `reve-1`
+5. Set **Default Model**: `reve-fast`
 </details>
 
 <details>
@@ -273,7 +273,7 @@ $headers = @{
 }
 
 $body = @{
-    model  = "reve-1"
+    model  = "reve-fast"
     prompt = "A cinematic futuristic cyberpunk city at night, neon lights, rain"
     size   = "1024x1024"
     n      = 1
@@ -294,7 +294,7 @@ curl -X POST http://localhost:5674/v1/images/generations \
   -H "Authorization: Bearer sk-dummy" \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "reve-1",
+    "model": "reve-fast",
     "prompt": "a golden vintage pocket watch on dark velvet, studio lighting",
     "size": "1792x1024"
   }' | jq -r '.data[0].b64_json' | base64 -d > watch.png

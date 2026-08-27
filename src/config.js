@@ -46,6 +46,15 @@ const config = {
   // OpenAI-Compatible Native Reve Models Catalog
   models: [
     {
+      id: 'reve-fast',
+      object: 'model',
+      created: 1714521600,
+      owned_by: 'reve',
+      permission: [],
+      root: 'reve-fast',
+      parent: null,
+    },
+    {
       id: 'reve-1',
       object: 'model',
       created: 1714521600,
@@ -70,15 +79,6 @@ const config = {
       owned_by: 'reve',
       permission: [],
       root: 'reve-preview',
-      parent: null,
-    },
-    {
-      id: 'reve-fast',
-      object: 'model',
-      created: 1714521600,
-      owned_by: 'reve',
-      permission: [],
-      root: 'reve-fast',
       parent: null,
     },
   ],

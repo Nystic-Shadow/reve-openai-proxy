@@ -194,7 +194,7 @@ router.post('/images/generations', async (req, res) => {
   try {
     const {
       prompt,
-      model = 'reve-1',
+      model = 'reve-fast',
       n = 1,
       size = '1024x1024',
       quality = 'hd',
@@ -268,7 +268,7 @@ router.post('/images/generations', async (req, res) => {
 router.post('/images/edits', upload.single('image'), async (req, res) => {
   try {
     let prompt = req.body.prompt;
-    let model = req.body.model || 'reve-1';
+    let model = req.body.model || 'reve-fast';
     let size = req.body.size || '1024x1024';
     let quality = req.body.quality || 'hd';
     let aspect_ratio = req.body.aspect_ratio;
