@@ -223,7 +223,7 @@ function printBanner({ port, accounts, mode }) {
     `${ANSI.bold}Server Port:${ANSI.reset}     ${ANSI.brightYellow}${port}${ANSI.reset} ${ANSI.dim}(Default: 5674)${ANSI.reset}`,
     `${ANSI.bold}Routing Mode:${ANSI.reset}    ${modeBadge}`,
     `${ANSI.bold}Auth Mode:${ANSI.reset}       ${ANSI.brightGreen}Dummy / Any API Key Accepted${ANSI.reset} ${ANSI.dim}(sk-dummy, etc.)${ANSI.reset}`,
-    `${ANSI.bold}Models Active:${ANSI.reset}   ${ANSI.brightCyan}dall-e-3, dall-e-2, reve-1, reve-2, reve-preview, reve-fast${ANSI.reset}`,
+    `${ANSI.bold}Models Active:${ANSI.reset}   ${ANSI.brightCyan}reve-1, reve-2, reve-preview, reve-fast${ANSI.reset}`,
     `${ANSI.bold}GitHub Repo:${ANSI.reset}     ${ANSI.cyan}https://github.com/Nystic-Shadow${ANSI.reset}`,
     ``,
     `${ANSI.bold}${ANSI.underline}Available API Endpoints:${ANSI.reset}`,

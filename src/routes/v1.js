@@ -69,7 +69,6 @@ function resolveDimensions(sizeStr, aspectRatioStr, quality = 'hd') {
       const base = config.aspectRatios[s];
       return isHd ? { width: base.width * (base.width <= 1280 ? 2 : 1), height: base.height * (base.height <= 1280 ? 2 : 1) } : base;
     }
-    // DALL-E 3 standard sizes -> High Resolution Ultra Quality mapping
     if (s === '1792x1024' || s === 'landscape') {
       return { width: 2560, height: 1440 }; // 2K QHD Widescreen
     }
@@ -195,7 +194,7 @@ router.post('/images/generations', async (req, res) => {
   try {
     const {
       prompt,
-      model = 'dall-e-3',
+      model = 'reve-1',
       n = 1,
       size = '1024x1024',
       quality = 'hd',
@@ -269,7 +268,7 @@ router.post('/images/generations', async (req, res) => {
 router.post('/images/edits', upload.single('image'), async (req, res) => {
   try {
     let prompt = req.body.prompt;
-    let model = req.body.model || 'dall-e-3';
+    let model = req.body.model || 'reve-1';
     let size = req.body.size || '1024x1024';
     let quality = req.body.quality || 'hd';
     let aspect_ratio = req.body.aspect_ratio;

@@ -1,7 +1,7 @@
 {
   "name": "reve-openai-proxy",
   "version": "2.1.0",
-  "description": "High-Performance OpenAI-Compatible Image Generation API Proxy for Reve.com (DALL-E 3 / DALL-E 2 Drop-in Replacement with Multi-Account Load Balancing)",
+  "description": "High-Performance OpenAI-Compatible Image Generation API Proxy for Reve.com (Multi-Account Load Balancing with Native 4K Ultra-HD Diffusion)",
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
@@ -24,9 +24,6 @@
     "openai",
     "openai-proxy",
     "openai-images-api",
-    "dalle-3",
-    "dalle-2",
-    "dalle-api",
     "image-generation",
     "ai-image-generator",
     "hermes-agent",
@@ -34,7 +31,6 @@
     "open-webui",
     "librechat",
     "multi-account",
-    "reverse-engineered-api",
     "text-to-image",
     "inpainting"
   ],
