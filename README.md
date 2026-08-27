@@ -24,9 +24,10 @@
 ---
 
 [✨ Key Features](#-key-features) •
+[🎨 Supported Models](#-supported-models) •
+[📐 4K Resolution Matrix](#-4k-resolution--aspect-ratio-matrix) •
 [🌐 Universal Compatibility](#-universal-compatibility) •
 [⚡ Quick Start](#-quick-start) •
-[📐 4K Resolution Matrix](#-4k-resolution--aspect-ratio-matrix) •
 [💻 SDK & Client Integrations](#-sdk--client-integrations) •
 [🐳 Docker Setup](#-docker-deployment) •
 [👤 Author](#-author)
@@ -49,6 +50,30 @@
   * **Formats**: `b64_json` (Base64) and `url` (Hosted image link).
 * 🎨 **Inpainting & Image Edits**: Supports `/v1/images/edits` with both standard `multipart/form-data` file uploads and JSON Base64/URL inputs.
 * ⚡ **Connection Pooling & Parallel Batching**: HTTP Keep-Alive sockets with concurrent multi-account generation when requesting `n > 1`.
+
+---
+
+## 🎨 Supported Models
+
+| Model ID | Engine Target | Capabilities | Description |
+|---|---|---|---|
+| **`dall-e-3`** | Reve Flagship UHD | `text2image`, `edits` | High-detail realistic scenes & artwork (Drop-in DALL-E 3) |
+| **`dall-e-2`** | Reve Standard | `text2image`, `edits` | Quick generation & testing (Drop-in DALL-E 2) |
+| **`reve-1`** | Reve Direct Core | `text2image`, `edits` | Direct Reve diffusion pipeline |
+| **`reve-2` / `reve-preview`** | Reve Next-Gen Engine | `text2image`, `edits` | Advanced prompt composition |
+| **`reve-fast`** | Reve Turbo | `text2image` | Rapid prototyping & fast iterations |
+
+---
+
+## 📐 4K Resolution & Aspect Ratio Matrix
+
+| Parameter / Aspect Ratio | Native Rendered Canvas | Best Use Case |
+|---|---|---|
+| `1:1` or `1024x1024` | **4096 × 4096 / 2048 × 2048 (UHD Square)** | Avatars, Profile Pictures, Album Covers |
+| `16:9` or `1792x1024` | **2560 × 1440 (QHD Widescreen)** | Desktop Wallpapers, YouTube Covers, Landscapes |
+| `9:16` or `1024x1792` | **1440 × 2560 (QHD Portrait)** | Mobile Wallpapers, Instagram Stories, TikTok |
+| `21:9` | **2560 × 1080 (Ultrawide)** | Cinematic Concept Art, Panoramic Vistas |
+| `4:3` / `3:4` | **2048 × 1536 / 1536 × 2048** | Classic Photography, Posters |
 
 ---
 
@@ -276,30 +301,6 @@ curl -X POST http://localhost:5674/v1/images/generations \
   }' | jq -r '.data[0].b64_json' | base64 -d > watch.png
 ```
 </details>
-
----
-
-## 📐 4K Resolution & Aspect Ratio Matrix
-
-| Parameter / Aspect Ratio | Native Rendered Canvas | Best Use Case |
-|---|---|---|
-| `1:1` or `1024x1024` | **4096 × 4096 / 2048 × 2048 (UHD Square)** | Avatars, Profile Pictures, Album Covers |
-| `16:9` or `1792x1024` | **2560 × 1440 (QHD Widescreen)** | Desktop Wallpapers, YouTube Covers, Landscapes |
-| `9:16` or `1024x1792` | **1440 × 2560 (QHD Portrait)** | Mobile Wallpapers, Instagram Stories, TikTok |
-| `21:9` | **2560 × 1080 (Ultrawide)** | Cinematic Concept Art, Panoramic Vistas |
-| `4:3` / `3:4` | **2048 × 1536 / 1536 × 2048** | Classic Photography, Posters |
-
----
-
-## 🎨 Supported Models
-
-| Model ID | Engine Target | Capabilities | Description |
-|---|---|---|---|
-| **`dall-e-3`** | Reve Flagship UHD | `text2image`, `edits` | High-detail realistic scenes & artwork (Drop-in DALL-E 3) |
-| **`dall-e-2`** | Reve Standard | `text2image`, `edits` | Quick generation & testing (Drop-in DALL-E 2) |
-| **`reve-1`** | Reve Direct Core | `text2image`, `edits` | Direct Reve diffusion pipeline |
-| **`reve-2` / `reve-preview`** | Reve Next-Gen Engine | `text2image`, `edits` | Advanced prompt composition |
-| **`reve-fast`** | Reve Turbo | `text2image` | Rapid prototyping & fast iterations |
 
 ---
 
