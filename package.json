@@ -1,0 +1,49 @@
+{
+  "name": "reve-openai-proxy",
+  "version": "2.1.0",
+  "description": "High-Performance OpenAI-Compatible Image Generation API Proxy for Reve.com (DALL-E 3 / DALL-E 2 Drop-in Replacement with Multi-Account Load Balancing)",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Nystic-Shadow/reve-openai-proxy.git"
+  },
+  "homepage": "https://github.com/Nystic-Shadow/reve-openai-proxy#readme",
+  "bugs": {
+    "url": "https://github.com/Nystic-Shadow/reve-openai-proxy/issues"
+  },
+  "author": "Nystic-Shadow (https://github.com/Nystic-Shadow)",
+  "license": "MIT",
+  "keywords": [
+    "reve",
+    "reve-ai",
+    "reve-api",
+    "openai",
+    "openai-proxy",
+    "openai-images-api",
+    "dalle-3",
+    "dalle-2",
+    "dalle-api",
+    "image-generation",
+    "ai-image-generator",
+    "hermes-agent",
+    "comfyui",
+    "open-webui",
+    "librechat",
+    "multi-account",
+    "reverse-engineered-api",
+    "text-to-image",
+    "inpainting"
+  ],
+  "dependencies": {
+    "axios": "^1.7.9",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "form-data": "^4.0.2",
+    "multer": "^1.4.5-lts.1"
+  }
+}
